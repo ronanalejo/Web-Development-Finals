@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoleStealer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/logo.png">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="index.html"><img src="img/logo.png" alt="Store Logo" class="navbar-logo"></a>
+            <a href="index.html">Home</a>
+            <input type="text" id="searchBar" placeholder="Search products...">
+            <div style="position: relative; display: flex; align-items: center;">
+                <span id="userDisplay"></span>
+                <img src="img/cart.png" id="cartButton" alt="Cart" style="height: 24px; width: 24px; cursor: pointer;">
+                <span id="cartCount" class="cart-count">0</span>
+            </div>
+        </div>
+    </header>
+
+    <main id="productContainer" class="product-container">
+    </main>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="order-form-container">
+                <h1>Cart</h1>
+                    <form id="cartModal" class="flex-item">
+                        <section class="cart-summary">
+                            <input type="checkbox" id="selectAll"> Select All</input>
+                            <button id="deleteSelected" style="margin-left: 175px;">Delete Selected</button>
+                            <div id="cartItems" class="cart-items"></div>
+                        </section>
+                    </form>
+                </div>
+        </div>
+        <div class="modal-footer">
+            <p>Total: <span id="cartTotal">$0</span></p>
+            <a href="orderForm.html"><button class="checkout-btn" id="checkout">Checkout</button></a>
+        </div>
+     </div>
+
+    <script src="js/checkLogin.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/common.js"></script>
+</body>
+</html>

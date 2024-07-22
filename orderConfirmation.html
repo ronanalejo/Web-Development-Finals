@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SoleStealer</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="icon" href="img/logo.png">
+    </head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="index.html"><img src="img/logo.png" alt="Store Logo" class="navbar-logo"></a>
+            <a href="index.html">Home</a>
+            <input type="text" id="searchBar" placeholder="Search products...">
+            <div style="position: relative; display: flex; align-items: center;">
+                <span id="userDisplay"></span>
+            </div>
+        </div> 
+        </div>    
+    </header>
+    <main class="order-form-container">
+        <p style="margin: 20px 0px 20px 80px;"><a href="index.html">Home</a> / <a href="orderForm.html">Order Details</a> / <a>Order Confirmation</a></p>
+        <h1 style="text-align: center;">Thank you for Ordering!</h1>
+        <div class="flex-container">
+            <form id="orderForm" class="flex-item">
+                <section style="margin: 0px 20px 0px 80px;">
+                    <h1>Cart Summary</h1>
+                    <div id="cartItems"></div>
+                    <p>Total: <span id="cartTotal">$0</span></p>
+                </section>
+            </form>
+            
+            <section style="margin: 40px 80px 0px 0px;" class="shipping-info flex-item">
+                <h1>Recipient Information</h1>
+                        <h3>Recipient Name: <span id="recipientName"></span></h2>
+                        <h3>Shipping Address: <span id="shippingAddress"></span></h2>
+                        <h3>Contact Number: <span id="contactNumber"></span></h2>
+                        <a onclick="removeItems()"><button>Back Home</button></a>
+                        
+            </section>
+            
+        </div>
+    </main>
+    
+    <script src="js/checkLogin.js"></script>
+    <script src="js/orderConfirmationScript.js"></script>
+</body>
+</html>
+    

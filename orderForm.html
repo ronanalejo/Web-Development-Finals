@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>SoleStealer</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="icon" href="img/logo.png">
+    </head>
+<body>
+    <header>
+        <div class="navbar">
+            <a href="index.html"><img src="img/logo.png" alt="Store Logo" class="navbar-logo"></a>
+            <a href="index.html">Home</a>
+            <input type="text" id="searchBar" placeholder="Search products...">
+            <div style="position: relative; display: flex; align-items: center;">
+                <span id="userDisplay"></span>
+            </div>
+        </div> 
+    </header>
+    <main class="order-form-container">
+        <p style="margin: 20px 0px 20px 80px;"><a href="index.html">Home</a> / <a>Order Details</a></p>
+        <h1 style="margin: 20px 0px 20px 80px;">Order Details</h1>
+        <div class="flex-container">
+            <form id="orderForm" class="order-content-container">
+                <div class="cart-summary-container">
+                    <section class="cart-summary">
+                        <h2>Cart Summary</h2>
+                        <input type="checkbox" id="selectAll"> Select All</input>
+                        <button id="deleteSelected" style="margin-left: 400px;">Delete Selected</button>
+                        <div id="cartItems" class="cart-items"></div>
+                        <p>Total: <span id="cartTotal">$0</span></p>
+                    </section>
+                </div>
+                <div class="shipping-info-container">
+                    <section class="shipping-info">
+                        <h2>Shipping Information</h2>
+                        <input type="text" id="firstName" placeholder="First Name" required> <br> <br>
+                        <input type="text" id="lastName" placeholder="Last Name" required> <br> <br>
+                        <input type="text" id="shippingAddress" placeholder="Shipping Address" required> <br> <br>
+                        <input type="tel" id="contactNumber" placeholder="Contact Number" required> <br> <br>
+                        <div class="form-buttons">
+                            <button type="button" id="cancelOrder" onclick="window.location.href='index.html'">Cancel</button>
+                            <button type="submit" class="place-order-btn">Place Order</button>
+                        </div>
+                    </section>
+                </div>
+            </form>
+        </div>
+    </main>
+    <script src="js/checkLogin.js"></script>
+    <script src="js/orderFormScript.js"></script>
+    <script src="js/common.js"></script>
+    
+</body>
+</html>
