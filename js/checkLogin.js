@@ -1,8 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    if (!sessionStorage.getItem('currentUser')) {
-        window.location.href = 'login.html';
-    } else {
-        const username = sessionStorage.getItem('currentUser');
-        document.getElementById('userDisplay').textContent = `${username}`;
-    }
+    fetch('checkSession.php')
+        .then(response => response.json())
+        .then(data => {
+            if (!data.loggedIn) {
+                window.location.href = 'login.php';
+            } else {
+                document.getElementById('userDisplay').textContent = data.username;
+            }
+        });
 });
