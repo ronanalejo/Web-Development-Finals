@@ -1,5 +1,6 @@
 <?php
 include 'session_settings.php';
+include 'config.php';
 
 $response = [
     'loggedIn' => isset($_SESSION['user_id']),
