@@ -67,10 +67,32 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
         <?php endif; ?>
     </main>
 
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="order-form-container">
+                <h1>Cart</h1>
+                    <form id="cartModal" class="flex-item">
+                        <section class="cart-summary">
+                            <input type="checkbox" id="selectAll"> Select All</input>
+                            <button id="deleteSelected" style="margin-left: 175px;">Delete Selected</button>
+                            <div id="cartItems" class="cart-items"></div>
+                        </section>
+                    </form>
+                </div>
+        </div>
+        <div class="modal-footer">
+            <p>Total: <span id="cartTotal">$0</span></p>
+            <a href="orderForm.html"><button class="checkout-btn" id="checkout">Checkout</button></a>
+        </div>
+     </div>
+
+
     <!-- SCRIPT SECTION -->
 
     <script src="js/productPageScript.js"></script>
     <script src="js/script.js"></script>
+    <script src="js/common.js"></script>
     <script>
         function filterProducts() {
             const query = document.getElementById('searchBar').value.toLowerCase();
