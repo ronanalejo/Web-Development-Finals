@@ -20,15 +20,18 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoleStealer - Product Page</title>
+    <title>SoleMates - Product Page</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="img/logo.png">
 </head>
 <body>
+
+    <!-- HEADER SECTION -->
+
     <header>
         <div class="navbar">
-            <a href="productPage.php"><img src="img/logo.png" alt="Store Logo" class="navbar-logo"></a>
-            <a href="productPage.php">Home</a>
+            <a href="productPage.php"><img src="img/solemates_logo1.jpg" alt="Store Logo" class="navbar-logo"></a>
+            <a id="home-btn" href="productPage.php">Home</a>
             <input type="text" id="searchBar" placeholder="Search products..." oninput="filterProducts()">
             <div style="position: relative; display: flex; align-items: center;">
                 <span id="userDisplay"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
@@ -39,6 +42,8 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
         </div>
     </header>
 
+    <!-- MAIN SECTION -->
+
     <main id="productContainer" class="product-container">
         <div id="cartItems" class="cart-items"></div> <!-- Ensure this element is present -->
         <div id="cartTotal" class="cart-total"></div> <!-- Ensure this element is present -->
@@ -48,7 +53,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
                     <img src='<?php echo htmlspecialchars($product['img']); ?>' alt='<?php echo htmlspecialchars($product['name']); ?>' />
                     <h3><?php echo htmlspecialchars($product['name']); ?></h3>
                     <p>$<?php echo htmlspecialchars($product['price']); ?></p>
-                    <form action="addToCart.php" method="POST">
+                    <form class="addCartBtn" action="addToCart.php" method="POST">
                         <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
                         <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['name']); ?>">
                         <input type="hidden" name="product_price" value="<?php echo $product['price']; ?>">
@@ -61,6 +66,8 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
             <p>No products found</p>
         <?php endif; ?>
     </main>
+
+    <!-- SCRIPT SECTION -->
 
     <script src="js/productPageScript.js"></script>
     <script src="js/script.js"></script>

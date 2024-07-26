@@ -42,14 +42,16 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoleStealer - Login</title>
+    <title>SoleMates - Login</title>
     <link rel="stylesheet" href="css/login.css">
-    <link rel="icon" href="img/logo.png">
+    <link rel="icon" href="img/solemates_logo1.jpg">
 </head>
-<body>
-    <img src="img/favicon.png" alt="Image" class="Logo">
-    <h1>Welcome to SoleStealer</h1>
+
+<body background="img/solemates_bg2.webp">
+    <img src="img/solemates_logo1.jpg" alt="Image" class="Logo">
+    
     <div class="form-container">
+    <h1 id="welcome-text" style="color: black;">Welcome!</h1>
         <form id="loginForm" method="POST" action="login.php">
             <input type="text" id="username" name="username" placeholder="Username" required>
             <input type="password" id="password" name="password" placeholder="Password" required>
@@ -60,5 +62,6 @@ $conn->close();
             </div>
         </form>
     </div>
+
 </body>
 </html>

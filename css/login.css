@@ -1,3 +1,8 @@
+:root {
+    --primary--color: rgb(36, 36, 36);
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -7,6 +12,12 @@
 body {
     font-family: sans-serif;
     background-color: #1b3d49;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
+    filter: blur(10%);
 }
 
 h1 {
@@ -15,17 +26,24 @@ h1 {
 
 .Logo {
     display: block;
-    margin: 0 auto 10px;
+    margin: 0 auto 20px;
+    margin-top: 25px;
     max-width: 100%;
-    width: 300px;
+    width: 250px;
     height: auto;
+    border-radius: 150px;
+}
+
+h1#welcome-text {
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .form-container {
     width: 400px;
     margin: 30px auto;
-    background-color: #fff;
-    padding: 20px;
+    background-color: white;
+    padding: 20px 20px 30px 20px;
     border-radius: 20px;
 }
 
@@ -42,13 +60,15 @@ h1 {
 }
 
 #loginForm button {
-    padding: 10px 15px;
-    background-color: #007bff;
+    padding: 12px 25px;
+    background-color: var(--primary--color);
     color: #fff;
     border: none;
     border-radius: 100px;
     cursor: pointer;
     flex: 1; 
+    margin: 15px 0px 15px 0px;
+    transition: 0.2s;
 }
 
 #loginForm button + button {
@@ -56,7 +76,7 @@ h1 {
 }
 
 #loginForm button:hover {
-    background-color: #0056b3;
+    opacity: 80%;
 }
 
 
