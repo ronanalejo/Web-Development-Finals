@@ -44,14 +44,14 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoleStealer - Sign Up</title>
-    <link rel="stylesheet" href="css/signup.css">
+    <title>SoleMates - Sign Up</title>
     <link rel="icon" href="img/logo.png">
 </head>
 <body>
-    <img src="img/favicon.png" alt="Image" class="Logo">
-    <h1>Welcome to SoleStealer</h1>
+    <img src="img/solemates_logo1.jpg" alt="Image" class="Logo">
+    <h1 style="color: white;" >Welcome to Solemates</h1>
     <div class="form-container">
+    <h3 id="create-text" style="color: black;" >Create Account</h3>
         <?php
         if (isset($error)) {
             echo "<p class='error'>$error</p>";
@@ -66,3 +66,117 @@ $conn->close();
     </div>
 </body>
 </html>
+
+<style>
+
+:root {
+    --primary--color: #2c2b30;
+}
+
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: var(--primary--color);
+}
+
+h1 {
+    text-align: center;
+}
+
+.Logo {
+    display: block;
+    margin: 0 auto 20px;
+    margin-top: 25px;
+    max-width: 100%;
+    width: 250px;
+    height: auto;
+    border-radius: 150px;
+}
+
+.form-container {
+    width: 400px;
+    margin: 30px auto;
+    margin-bottom: 200px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+}
+
+#signUpForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#signUpForm input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 100px;
+}
+
+#signUpForm button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+#signUpForm button:hover {
+    background-color: #0056b3;
+}
+
+h3#create-text {
+    margin: 10px 0px 35px 108px;
+}
+
+
+button {
+    width: 100%;
+    background-color: #1b3d49;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1b3d49;
+}
+
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    z-index: 9999;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.popup-message {
+    margin-bottom: 10px;
+}
+
+.popup-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.login-link {
+    text-decoration: none;
+    color:#007bff;
+}
+</style>

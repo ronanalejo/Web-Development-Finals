@@ -1,13 +1,12 @@
 :root {
-    --primary--color: rgb(36, 36, 36);
+    --primary--color: #2c2b30;
 }
 
 body, html {
     margin: 0;
     padding: 0;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: #F7F7F7; 
-    background-image: url(solemates_bg1.webp);
+
 }
 
 header {
@@ -31,6 +30,7 @@ header {
 
 .navbar-logo {
     height: 60px;
+    border-radius: 150px;
 }
 
 .navbar a, #cartButton, #usernameDisplay {
@@ -64,9 +64,9 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
+    gap: 50px;
     padding: 50px 5%;
-    
+    transition: 0.2s;
 }
 .product-card {
     width: 300px;
