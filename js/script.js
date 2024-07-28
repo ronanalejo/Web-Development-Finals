@@ -52,6 +52,7 @@ function renderCartItems(cartItems) {
     }
 
     updateCartCount(cartItems);
+    addQuantityControlListeners(cartItems);
 }
 
 function updateCartCount(cartItems) { 
@@ -63,24 +64,61 @@ function updateCartCount(cartItems) {
     }
 }
 
+function addQuantityControlListeners(cartItems) {
+    const decreaseButtons = document.querySelectorAll('.quantity-decrease');
+    const increaseButtons = document.querySelectorAll('.quantity-increase');
+    const deleteButtons = document.querySelectorAll('.delete-item-btn');
+
+    decreaseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            if (cartItems[index].quantity > 1) {
+                cartItems[index].quantity--;
+                updateCart(cartItems);
+            }
+        });
+    });
+
+    increaseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            cartItems[index].quantity++;
+            updateCart(cartItems);
+        });
+    });
+
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            cartItems.splice(index, 1);
+            updateCart(cartItems);
+        });
+    });
+}
+
+function updateCart(cartItems) {
+    sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
+    renderCartItems(cartItems);
+    updateCartCount(cartItems);
+}
+
 const cartButton = document.getElementById('cartButton');
-    const cartModal = document.getElementById('cartModal');
-    const closeModalElements = document.getElementsByClassName("close");
+const cartModal = document.getElementById('cartModal');
+const closeModalElements = document.getElementsByClassName("close");
 
-    if (cartButton && cartModal && closeModalElements.length > 0) {
-            const closeModal = closeModalElements[0];
-            cartButton.onclick = function() {
-                cartModal.style.display = "block";
-            };
+if (cartButton && cartModal && closeModalElements.length > 0) {
+    const closeModal = closeModalElements[0];
+    cartButton.onclick = function() {
+        cartModal.style.display = "block";
+    };
 
-            closeModal.onclick = function() {
-                cartModal.style.display = "none";
-            };
+    closeModal.onclick = function() {
+        cartModal.style.display = "none";
+    };
 
-            window.onclick = function(event) {
-                if (event.target === cartModal) {
-                    cartModal.style.display = "none";
-                }
-            };
+    window.onclick = function(event) {
+        if (event.target === cartModal) {
+            cartModal.style.display = "none";
         }
-
+    };
+}

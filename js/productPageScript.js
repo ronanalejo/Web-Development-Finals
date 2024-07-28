@@ -1,13 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     document.body.addEventListener('click', function(event) {
-        // Handle product card click
         if (event.target.closest('.product-card')) {
             const card = event.target.closest('.product-card');
             const productId = card.getAttribute('data-product-id');
-            console.log('Redirecting to product ID:', productId); // Debug log
             window.location.href = 'productDetail.php?id=' + productId;
         }
-
     });
 });
 
@@ -28,14 +25,7 @@ function addToCart(productId) {
 }
 
 function updateCartCount() {
-    fetch('getCartCount.php')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('cartCount').innerText = data.count;
-        });
-}
-
-function searchProducts() {
-    const searchQuery = document.getElementById('searchBar').value;
-    window.location.href = 'productPage.php?search=' + searchQuery;
+    const cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+    const cartCountElement = document.getElementById('cartCount');
+    cartCountElement.textContent = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 }

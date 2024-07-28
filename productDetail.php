@@ -41,15 +41,15 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($product['name']); ?> - SoleStealer</title>
-    <link rel="icon" href="img/logo.png">
+    <title><?php echo htmlspecialchars($product['name']); ?></title>
+    <link rel="icon" href="img/solemates_logo1.jpg">
 </head>
 <body>
     <header>
         <div class="navbar">
             <a href="productPage.php"><img src="img/solemates_logo1.jpg" alt="Store Logo" class="navbar-logo"></a>
             <a id="home-btn" href="productPage.php">Home</a>
-            <input type="text" id="searchBar" placeholder="Search here" oninput="showSuggestions()">
+            <input type="text" id="searchBar" placeholder="Search..." oninput="showSuggestions()">
             <span id="search-svg"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="gray"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg></span>
             <div id="searchSuggestions" class="search-suggestions"></div>
             <div style="position: relative; display: flex; align-items: center;">
@@ -69,13 +69,22 @@ $conn->close();
             <h1><?php echo htmlspecialchars($product['name']); ?></h1>
             <p><?php echo htmlspecialchars($product['description']); ?></p>
             <p>Price: $<?php echo htmlspecialchars($product['price']); ?></p>
-            <p>Available Sizes: <?php echo htmlspecialchars($product['size']); ?></p>
-            <p>Stock: <?php echo htmlspecialchars($product['stock']); ?></p>
-            <button onclick="addToCart(<?php echo $product['id']; ?>)">Add to Cart</button>
-            </div>
-            
+            <div class="size-selection">
+            <label for="size">Select Size:</label>
+            <input type="radio" name="size" value="7" checked> 7
+            <input type="radio" name="size" value="8"> 8
+            <input type="radio" name="size" value="9"> 9
+            <input type="radio" name="size" value="10"> 10
+            <input type="radio" name="size" value="11"> 11
+        </div> <br>
+
+        <div class="quantity-selection">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" value="1" min="1">
         </div>
-    </main>
+
+        <button class="add-to-cart" data-id="<?= $product['id']; ?>" data-name="<?= $product['name']; ?>" data-price="<?= $product['price']; ?>" data-img="<?= $product['img']; ?>">Add to Cart</button>
+    </div>
 
     <div id="cartModal" class="modal">
         <div class="modal-content">
@@ -92,16 +101,15 @@ $conn->close();
                 </div>
         </div>
         <div class="modal-footer">
-            <p>Total: <span id="cartTotal">$0</span></p>
+            <div>
+            <br> Total Items: <span id="totalItems"></span> <br>
+            <br> Total Price: $<span id="totalPrice"></span>
+            </div>
             <a href="orderForm.html"><button class="checkout-btn" id="checkout">Checkout</button></a>
         </div>
      </div>
 
     <script>
-        function addToCart(productId) {
-            console.log('Adding product to cart:', productId);
-            // Add AJAX or other logic to add product to cart
-        }
 
         function showSuggestions() {
             const inputVal = document.getElementById('searchBar').value.toLowerCase();
@@ -134,6 +142,9 @@ $conn->close();
     </script>
     <script src="js/script.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/productPageScript.js"></script>
+    <script src="js/cart.js"></script>
+    
 </body>
 </html>
 
@@ -208,7 +219,7 @@ header {
 span#search-svg {
     position: absolute;
     float: right;
-    margin-left: 1112px;
+    margin-left: 1095px;
 }
 
 #logout-btn {

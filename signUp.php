@@ -44,8 +44,8 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoleMates - Sign Up</title>
-    <link rel="icon" href="img/logo.png">
+    <title>SoleMates</title>
+    <link rel="icon" href="img/solemates_logo1.jpg">
 </head>
 <body>
     <img src="img/solemates_logo1.jpg" alt="Image" class="Logo">

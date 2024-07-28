@@ -22,8 +22,8 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SoleMates - Product Page</title>
-    <link rel="icon" href="img/logo.png">
+    <title>SoleMates</title>
+    <link rel="icon" href="img/solemates_logo1.jpg">
 </head>
 <body>
 
@@ -33,7 +33,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
         <div class="navbar">
             <a href="productPage.php"><img src="img/solemates_logo1.jpg" alt="Store Logo" class="navbar-logo"></a>
             <a id="home-btn" href="productPage.php">Home</a>
-            <input type="text" id="searchBar" placeholder="Search here"  oninput="filterProducts()">
+            <input type="text" id="searchBar" placeholder="Search..."  oninput="filterProducts()">
             <span id="search-svg"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="gray"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg></span>
             <div style="position: relative; display: flex; align-items: center;">
                 <span id="userDisplay"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
@@ -47,8 +47,6 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
     <!-- MAIN SECTION -->
 
     <main id="productContainer" class="product-container">
-        <div id="cartItems" class="cart-items"></div> <!-- Ensure this element is present -->
-        <div id="cartTotal" class="cart-total"></div> <!-- Ensure this element is present -->
         <?php if (count($products) > 0): ?>
             <?php foreach ($products as $product): ?>
                 <div class='product-card' data-product-id='<?php echo htmlspecialchars($product['id']); ?>' data-product-name='<?php echo htmlspecialchars($product['name']); ?>'>
@@ -60,7 +58,6 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
                         <input type="hidden" name="product_name" value="<?php echo htmlspecialchars($product['name']); ?>">
                         <input type="hidden" name="product_price" value="<?php echo $product['price']; ?>">
                         <input type="hidden" name="product_img" value="<?php echo htmlspecialchars($product['img']); ?>">
-                        <button type="submit" class="add-to-cart-button">Add to Cart</button>
                     </form>
                 </div>
             <?php endforeach; ?>
@@ -84,7 +81,10 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
                 </div>
         </div>
         <div class="modal-footer">
-            <p>Total: <span id="cartTotal">$0</span></p>
+            <div>
+            <br> Total Items: <span id="totalItems"></span> <br>
+            <br> Total Price: $<span id="totalPrice"></span>
+            </div>
             <a href="orderForm.html"><button class="checkout-btn" id="checkout">Checkout</button></a>
         </div>
      </div>
@@ -95,6 +95,7 @@ $products = $result->fetch_all(MYSQLI_ASSOC);
     <script src="js/productPageScript.js"></script>
     <script src="js/script.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/cart.js"></script>
     <script>
         function filterProducts() {
             const query = document.getElementById('searchBar').value.toLowerCase();
@@ -190,7 +191,7 @@ header {
 span#search-svg {
     position: absolute;
     float: right;
-    margin-left: 1112px;
+    margin-left: 1085px;
 }
 
 #logout-btn {
