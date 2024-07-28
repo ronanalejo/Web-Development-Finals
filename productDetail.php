@@ -105,7 +105,7 @@ $conn->close();
             <br> Total Items: <span id="totalItems"></span> <br>
             <br> Total Price: $<span id="totalPrice"></span>
             </div>
-            <a href="orderForm.html"><button class="checkout-btn" id="checkout">Checkout</button></a>
+            <a href="orderForm.php"><button class="checkout-btn" id="checkout">Checkout</button></a>
         </div>
      </div>
 
