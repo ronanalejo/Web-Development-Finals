@@ -120,13 +120,6 @@ $conn->close();
 setCookieValue("userVisit", "Visited", 86400); // Set a cookie for 1 day
 echo "User Visit Cookie: " . getCookieValue("userVisit") . "<br>";
 
-$fileContent = readFileContent("welcome.txt");
-if (!$fileContent) {
-    writeFile("welcome.txt", "Welcome to our website!");
-    $fileContent = readFileContent("welcome.txt");
-}
-echo "File Content: " . $fileContent . "<br>";
-
 // Perform aggregate queries and display the results
 performAggregateQueries($conn);
 
