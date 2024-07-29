@@ -1,38 +1,3 @@
-<?php
-// orderForm.php
-
-session_start();
-require_once 'config.php';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $fullName = $_POST['fullName'];
-    $shippingAddress = $_POST['shippingAddress'];
-    $contactNumber = $_POST['contactNumber'];
-    $cartItems = $_SESSION['cartItems'];
-
-    $orderId = uniqid(); // Generating a unique order ID
-
-    foreach ($cartItems as $item) {
-        $productId = $item['id'];
-        $size = $item['size'];
-        $quantity = $item['quantity'];
-        $price = $item['price'];
-
-        // Insert each item into the orders table
-        $insertOrderItemQuery = "INSERT INTO orders (order_id, product_id, full_name, shipping_address, contact_number, size, quantity, price, order_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
-        $stmt = $conn->prepare($insertOrderItemQuery);
-        $stmt->bind_param('sssssiid', $orderId, $productId, $fullName, $shippingAddress, $contactNumber, $size, $quantity, $price);
-        $stmt->execute();
-    }
-
-    // Clear cart session
-    unset($_SESSION['cartItems']);
-
-    header("Location: orderConfirmation.php");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -70,7 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="shipping-info-container">
                     <section class="shipping-info">
                         <h2>Shipping Information</h2>
-                        <input type="text" id="fullName" name="fullName" placeholder="Full Name" required>
+                        <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                        <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
                         <input type="text" id="shippingAddress" name="shippingAddress" placeholder="Shipping Address" required>
                         <input type="text" id="contactNumber" name="contactNumber" placeholder="Contact Number" required>
                         <div class="form-buttons">
