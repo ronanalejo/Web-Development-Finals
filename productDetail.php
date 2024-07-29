@@ -49,7 +49,7 @@ $conn->close();
         <div class="navbar">
             <a href="productPage.php"><img src="img/solemates_logo1.jpg" alt="Store Logo" class="navbar-logo"></a>
             <a id="home-btn" href="productPage.php">Home</a>
-            <input type="text" id="searchBar" placeholder="Search..." oninput="showSuggestions()">
+            <input type="text" id="searchBar" placeholder="Search here" oninput="showSuggestions()">
             <span id="search-svg"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="gray"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg></span>
             <div id="searchSuggestions" class="search-suggestions"></div>
             <div style="position: relative; display: flex; align-items: center;">
@@ -70,12 +70,37 @@ $conn->close();
             <p><?php echo htmlspecialchars($product['description']); ?></p>
             <p>Price: $<?php echo htmlspecialchars($product['price']); ?></p>
             <div class="size-selection">
-            <label for="size">Select Size:</label>
-            <input type="radio" name="size" value="7" checked> 7
+            <label id="select-size-txt" for="size">Select Size: </label>
+
+            <label>
+                <input type="radio" name="radio" value="7">
+                <span>7</span>
+            </label>
+            <label>
+                <input type="radio" name="size" value="8">
+                <span>8</span>
+            </label>
+            <label>
+                <input type="radio" name="size" value="9">
+                <span>9</span>
+            </label>
+            <label>
+                <input type="radio" name="size" value="10">
+                <span>10</span>
+            </label>
+            <label>
+                <input type="radio" name="size" value="11">
+                <span>11</span>
+            </label>
+            <label>
+                <input type="radio" name="size" value="12">
+                <span>12</span>
+            </label>
+            <!-- <input type="radio" name="size" value="7" checked> 7
             <input type="radio" name="size" value="8"> 8
             <input type="radio" name="size" value="9"> 9
             <input type="radio" name="size" value="10"> 10
-            <input type="radio" name="size" value="11"> 11
+            <input type="radio" name="size" value="11"> 11 -->
         </div> <br>
 
         <div class="quantity-selection">
@@ -208,7 +233,7 @@ header {
 }
 #searchBar {
     flex-grow: 1;
-    margin: 0 130px;
+    margin: 0 155px;
     padding: 10px;
     border: 1px solid #DDD; 
     border-radius: 20px; 
@@ -218,7 +243,7 @@ header {
 span#search-svg {
     position: absolute;
     float: right;
-    margin-left: 1095px;
+    margin-left: 1090px;
 }
 
 #logout-btn {
@@ -275,16 +300,15 @@ span#search-svg {
     background-color: var(--primary--color);  
     color: #FFF;
     border: none;
-    padding: 10px;
+    padding: 10px 20px 10px 20px;
     cursor: pointer;
-    width: calc(100% - 40px);
-    margin: 20px;
+    margin: 40px 20px 20px 0px;
     border-radius: 20px; 
-    display: block;
     text-align: center;
+    transition: 0.2s;
 }
 .add-to-cart:hover {
-    background-color: var(--primary--color); 
+    opacity: 80%;
 }
 
 .addCartBtn {
@@ -300,6 +324,7 @@ span#search-svg {
 .cart-item {
     display: flex;
     align-items: center;
+    background-color: red;
 }
 .cart-item img {
     width: 100px;
@@ -414,6 +439,66 @@ button {
     color: white;
 }
 
+#select-size-txt {
+    margin-top: 5px;
+    margin-right: 5px;
+}
+
+.size-select {
+    border: black 1px;
+    background-color: red;
+}
+
+.size-selection {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.5rem; 
+    
+}
+.size-selection input[type="radio"] {
+    clip: react(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+.size-selection input[type="radio"]:checked + span {
+    box-shadow: 0 0 0 0.0625em gray;
+    background-color: #2c2b30;
+    color: white;
+}
+
+:focus {
+    outline: 0;
+    border: black;
+    box-shadow: 0 0 0 1px;
+}
+
+label span {
+    display: flex;
+    cursor: pointer;
+    background-color: #FFF;
+    padding: 0.375em 1em;
+    position: relative;
+    margin-left: .0625em;
+    box-shadow: 0 0 0 0.0625em;
+    letter-spacing: .05em;
+    color: #3e4963;
+    text-align: center;
+    transition: background-color .2s ease;
+}
+
+label:first-child span {
+  border-radius: .375em 0 0 .375em;
+}
+
+label:last-child span {
+  border-radius: 0 .375em .375em 0;
+}
+
+
 /* ------------------------------------------------ */
 /* ADD TO CART BUTTON SECTION */
 
@@ -431,7 +516,6 @@ button {
 }
 
 .size-btn:hover {
-   
     background-color: white;
     color: black;
 }
@@ -472,6 +556,7 @@ button {
 .cart-item {
     display: flex;
     align-items: center;
+    margin: 0px 50px 0px 0px ;
 }
 
 .cart-item-img {
@@ -485,10 +570,20 @@ button {
 }
 
 /* ------------------------------------------------ */
+/* PRODUCT DETAIL */
+
+#quantity {
+    max-width: 50px;
+    padding: 5px 0px 5px 3px;
+}
+
+.quantity-selection {
+    margin-right: 0px;
+}
 
 .quantity-input {
     width: 60px;
-    padding: 5px;
+    padding: 50px;
     margin-left: 10px;
     font-size: 1em;
 }
@@ -503,7 +598,7 @@ button {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 25px;
+    width: 5px;
     height: 25px;
     font-size: 16px;
     color: #fff;
@@ -518,12 +613,11 @@ button {
 .quantity-controls input {
     width: 40px;
     text-align: center;
-   
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     padding: 0;
     font-size: 16px;
     height: 25px;
-    line-height: 25px;
+    line-height: 20px;
 }
 
 /* ------------------------------------------------ */
@@ -551,7 +645,7 @@ input[type="text"], input[type="tel"], select, textarea {
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    border: 1px solid #ccc;
+    border: 0px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
 }
@@ -581,6 +675,7 @@ button:hover {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     display: flex;
     align-items: center;
+    margin: 0px 50px 0px 0px;
 }
 
 .cart-item-img {    
@@ -591,7 +686,7 @@ button:hover {
 
 .cart-item-info {
     flex-grow: 1;
-    font-size: 100px;
+    font-size: 120px;
 }
 
 .cart-item-name {
@@ -648,7 +743,6 @@ button:hover {
     border: 1px solid #ddd;
     padding: 20px;
     border-radius: 5px;
-    margin-bottom: 20px;
 }
 
 
@@ -938,7 +1032,7 @@ product-info {
 
 .cart-summary-container{
     flex: 1;
-    margin-right: 20px;
+    margin-right: 200px;
     width: 1250px;
 }
 
