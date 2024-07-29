@@ -52,12 +52,27 @@ if ($conn->query($sql) === TRUE) {
 }
 
 // Create orders table if it doesn't exist
+
+// kailangan palitan to hindi ko mapalitan pero ang ginawa ko na lang nag sql ako sa phpmyadmin
+
+//CREATE TABLE orders (
+//    id INT AUTO_INCREMENT PRIMARY KEY,
+//    first_name VARCHAR(255) NOT NULL,
+//    last_name VARCHAR(255) NOT NULL,
+//    full_name VARCHAR(255) NOT NULL,
+//    shipping_address VARCHAR(255) NOT NULL,
+//    contact_number VARCHAR(255) NOT NULL,
+//    product_id INT NOT NULL
+//);
+
+
 $sql = "CREATE TABLE IF NOT EXISTS orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    total_amount DECIMAL(10, 2) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    full_name VARCHAR(255) NOT NULL,
+    shipping_address VARCHAR(255) NOT NULL,
+    contact_number VARCHAR(255) NOT NULL
 )";
 if ($conn->query($sql) === TRUE) {
     echo "Orders table created successfully. ";
