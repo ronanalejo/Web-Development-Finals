@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', function() {
     fetchCartItems();
     document.getElementById('orderForm').addEventListener('submit', function(event) {
-        event.preventDefault(); 
+        event.preventDefault();
 
         const orderDetails = {
-            firstName: document.getElementById('firstName').value,
-            lastName: document.getElementById('lastName').value,
+            fullName: document.getElementById('fullName').value,
             shippingAddress: document.getElementById('shippingAddress').value,
-            contactNumber: document.getElementById('contactNumber').value
+            contactNumber: document.getElementById('contactNumber').value,
+            cartItems: JSON.parse(sessionStorage.getItem('cartItems')) || []
         };
 
-        fetch('saveOrderDetails.php', {
+        fetch('orderForm.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ function fetchCartItems() {
 
 function renderCartItems(cartItems) {
     const cartItemsContainer = document.getElementById('cartItems');
-    cartItemsContainer.innerHTML = ''; 
+    cartItemsContainer.innerHTML = '';
     let cartTotal = 0;
 
     cartItems.forEach((item, index) => {
@@ -67,7 +67,7 @@ function renderCartItems(cartItems) {
             </div>
         `;
         cartItemsContainer.appendChild(itemElement);
-        total += item.price * item.quantity;
+        cartTotal += item.price * item.quantity;
     });
 
     document.getElementById('cartTotal').innerText = cartTotal.toFixed(2);
