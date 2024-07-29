@@ -1,4 +1,8 @@
 <?php
+require 'config.php';
+include 'manageCookies.php';
+include 'fileHandler.php'; 
+include 'aggregateFunctions.php';
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -113,7 +117,22 @@ if ($conn->query($sql) === TRUE) {
 
 $conn->close();
 
+setCookieValue("userVisit", "Visited", 86400); // Set a cookie for 1 day
+echo "User Visit Cookie: " . getCookieValue("userVisit") . "<br>";
+
+$fileContent = readFileContent("welcome.txt");
+if (!$fileContent) {
+    writeFile("welcome.txt", "Welcome to our website!");
+    $fileContent = readFileContent("welcome.txt");
+}
+echo "File Content: " . $fileContent . "<br>";
+
+// Perform aggregate queries and display the results
+performAggregateQueries($conn);
+
+
 // Redirect to product page
 header("Location: productPage.php");
 exit();
+
 ?>
