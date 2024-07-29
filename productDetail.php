@@ -144,7 +144,6 @@ $conn->close();
     <script src="js/common.js"></script>
     <script src="js/productPageScript.js"></script>
     <script src="js/cart.js"></script>
-    
 </body>
 </html>
 
