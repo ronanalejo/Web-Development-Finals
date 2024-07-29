@@ -962,7 +962,7 @@ product-info {
     justify-content: center;
     align-items: center;
     opacity: 1;
-    transition: opacity 0.5s ease-out;
+    transition: opacity 0.2s ease-out;
     z-index: 999; /* Ensure it is above other elements */
 }
 
@@ -973,7 +973,7 @@ product-info {
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     opacity: 1;
-    transition: opacity 0.5s ease-out;
+    transition: opacity 0.2s ease-out;
 }
 
 .add-to-cart-overlay.fade-out {

@@ -40,8 +40,8 @@ function showAddToCartPopup() {
         overlay.classList.add('fade-out');
         setTimeout(() => {
             document.body.removeChild(overlay);
-        }, 500);
-    }, 1500);
+        }, 80);
+    }, 800);
 }
 
 function updateCartCount() {
