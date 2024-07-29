@@ -950,4 +950,35 @@ product-info {
     margin-right: 20px;
     
 }
+
+.add-to-cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+    z-index: 999; /* Ensure it is above other elements */
+}
+
+.add-to-cart-popup {
+    background-color: #4caf50;
+    color: white;
+    padding: 20px 40px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+.add-to-cart-overlay.fade-out {
+    opacity: 0;
+}
+
+
 </style>

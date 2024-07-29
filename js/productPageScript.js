@@ -18,10 +18,30 @@ function addToCart(productId) {
     }).then(response => {
         if (response.ok) {
             updateCartCount();
+            showAddToCartPopup();
         } else {
             alert('Failed to add product to cart.');
         }
     });
+}
+
+function showAddToCartPopup() {
+    const overlay = document.createElement('div');
+    overlay.classList.add('add-to-cart-overlay');
+
+    const popup = document.createElement('div');
+    popup.classList.add('add-to-cart-popup');
+    popup.textContent = 'Added to cart successfully!';
+
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+
+    setTimeout(() => {
+        overlay.classList.add('fade-out');
+        setTimeout(() => {
+            document.body.removeChild(overlay);
+        }, 500);
+    }, 1500);
 }
 
 function updateCartCount() {
