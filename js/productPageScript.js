@@ -6,6 +6,26 @@ document.addEventListener('DOMContentLoaded', function() {
             window.location.href = 'productDetail.php?id=' + productId;
         }
     });
+
+    const sizeButtons = document.querySelectorAll('.size-btn');
+    const stockCountElement = document.getElementById('stock-count');
+
+    sizeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const size = this.getAttribute('data-size');
+            const productId = document.querySelector('.product-detail-card').getAttribute('data-product-id');
+            
+            fetch(`getStock.php?product_id=${productId}&size=${size}`)
+                .then(response => response.json())
+                .then(data => {
+                    stockCountElement.textContent = data.stock;
+                })
+                .catch(error => {
+                    console.error('Error fetching stock:', error);
+                    stockCountElement.textContent = 'Error fetching stock';
+                });
+        });
+    });
 });
 
 function addToCart(productId) {

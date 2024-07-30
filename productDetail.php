@@ -62,7 +62,7 @@ $conn->close();
     </header>
 
     <main class="product-detail">
-        <div class="product-detail-card">
+        <div class="product-detail-card" data-product-id="<?= $product['id']; ?>">
             <img src="<?php echo htmlspecialchars($product['img']); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>">
             
             <div class="product-info">
@@ -70,74 +70,71 @@ $conn->close();
             <p><?php echo htmlspecialchars($product['description']); ?></p>
             <p>Price: $<?php echo htmlspecialchars($product['price']); ?></p>
             <div class="size-selection">
-            <label id="select-size-txt" for="size">Select Size: </label>
+                <label id="select-size-txt" for="size">Select Size: </label>
 
-            <label>
-                <input type="radio" name="radio" value="7">
-                <span>7</span>
-            </label>
-            <label>
-                <input type="radio" name="size" value="8">
-                <span>8</span>
-            </label>
-            <label>
-                <input type="radio" name="size" value="9">
-                <span>9</span>
-            </label>
-            <label>
-                <input type="radio" name="size" value="10">
-                <span>10</span>
-            </label>
-            <label>
-                <input type="radio" name="size" value="11">
-                <span>11</span>
-            </label>
-            <label>
-                <input type="radio" name="size" value="12">
-                <span>12</span>
-            </label>
-        </div> <br>
+                <label>
+                    <input type="radio" name="size" value="7" class="size-btn" data-size="7">
+                    <span>7</span>
+                </label>
+                <label>
+                    <input type="radio" name="size" value="8" class="size-btn" data-size="8">
+                    <span>8</span>
+                </label>
+                <label>
+                    <input type="radio" name="size" value="9" class="size-btn" data-size="9">
+                    <span>9</span>
+                </label>
+                <label>
+                    <input type="radio" name="size" value="10" class="size-btn" data-size="10">
+                    <span>10</span>
+                </label>
+                <label>
+                    <input type="radio" name="size" value="11" class="size-btn" data-size="11">
+                    <span>11</span>
+                </label>
+            </div> <br>
+            <div id="stock-info">Stock: <span id="stock-count">Select a size first!</span></div>
 
-        <div class="quantity-selection">
-            <label for="quantity">Quantity:</label>
-            <input type="number" id="quantity" name="quantity" value="1" min="1">
+            <div class="quantity-selection">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" value="1" min="1">
+            </div>
+
+            <button class="add-to-cart" data-id="<?= $product['id']; ?>" data-name="<?= $product['name']; ?>" data-price="<?= $product['price']; ?>" data-img="<?= $product['img']; ?>">Add to Cart</button>
         </div>
 
-        <button class="add-to-cart" data-id="<?= $product['id']; ?>" data-name="<?= $product['name']; ?>" data-price="<?= $product['price']; ?>" data-img="<?= $product['img']; ?>">Add to Cart</button>
-    </div>
-
-    <div id="cartModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <div class="order-form-container">
-                <h1>Cart</h1>
+        <div id="cartModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="order-form-container">
+                    <h1>Cart</h1>
                     <form id="cartModal" class="flex-item">
                         <section class="cart-summary">
                             <input type="checkbox" id="selectAll"> Select All</input>
-                            <button id="deleteSelected" style="margin-left: 195px; margin-bottom: -70px;">Delete Selected</button>
+                            <button id="deleteSelected" style="margin-left: 175px;">Delete Selected</button>
                             <div id="cartItems" class="cart-items"></div>
                         </section>
                     </form>
                 </div>
-        </div>
-        <div class="modal-footer">
-            <div>
-            <br> Total Items: <span id="totalItems"></span> <br>
-            <br> Total Price: $<span id="totalPrice"></span>
             </div>
-            <a href="orderForm.php"><button class="checkout-btn" id="checkout">Checkout</button></a>
+            <div class="modal-footer">
+                <div>
+                    <br> Total Items: <span id="totalItems"></span> <br>
+                    <br> Total Price: $<span id="totalPrice"></span>
+                </div>
+                <a href="orderForm.php"><button class="checkout-btn" id="checkout">Checkout</button></a>
+            </div>
         </div>
-     </div>
+    </main>
 
     <script>
-
         function showSuggestions() {
             const inputVal = document.getElementById('searchBar').value.toLowerCase();
             const suggestions = document.getElementById('searchSuggestions');
-            suggestions.innerHTML = ''; 
+            suggestions.innerHTML = '';
 
             if (inputVal.length > 0) {
-                fetch('getProducts.php')
+                fetch('getAllProducts.php')
                     .then(response => response.json())
                     .then(products => {
                         const filteredProducts = products.filter(product => product.name.toLowerCase().includes(inputVal));
@@ -159,6 +156,87 @@ $conn->close();
                 suggestions.style.display = 'none';
             }
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const sizeButtons = document.querySelectorAll('.size-btn');
+            const stockCountElement = document.getElementById('stock-count');
+
+            sizeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const size = this.getAttribute('data-size');
+                    const productId = document.querySelector('.product-detail-card').getAttribute('data-product-id');
+                    
+                    fetch(`getStock.php?product_id=${productId}&size=${size}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            stockCountElement.textContent = data.stock;
+                        })
+                        .catch(error => {
+                            console.error('Error fetching stock:', error);
+                            stockCountElement.textContent = 'Error fetching stock';
+                        });
+                });
+            });
+
+            document.querySelector('.add-to-cart').addEventListener('click', function(event) {
+                const selectedSize = document.querySelector('input[name="size"]:checked');
+                if (!selectedSize) {
+                    alert('Please select a size first!');
+                    return;
+                }
+
+                const stockCount = document.getElementById('stock-count').textContent;
+                if (stockCount === 'Out of Stock!') {
+                    alert(`The selected size for ${event.target.getAttribute('data-name')} is out of stock!`);
+                    return;
+                }
+
+                // Proceed to add to cart
+                const productId = event.target.getAttribute('data-id');
+                const size = selectedSize.value;
+                const quantity = document.getElementById('quantity').value;
+
+                fetch('addToCart.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ productId, size, quantity })
+                }).then(response => {
+                    if (response.ok) {
+                        updateCartCount();
+                        showAddToCartPopup();
+                    } else {
+                        alert('Failed to add product to cart.');
+                    }
+                });
+            });
+        });
+
+        function updateCartCount() {
+            const cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+            const cartCountElement = document.getElementById('cartCount');
+            cartCountElement.textContent = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+        }
+
+        function showAddToCartPopup() {
+            const overlay = document.createElement('div');
+            overlay.classList.add('add-to-cart-overlay');
+
+            const popup = document.createElement('div');
+            popup.classList.add('add-to-cart-popup');
+            popup.textContent = 'Added to cart successfully!';
+
+            overlay.appendChild(popup);
+            document.body.appendChild(overlay);
+
+            setTimeout(() => {
+                overlay.classList.add('fade-out');
+                setTimeout(() => {
+                    document.body.removeChild(overlay);
+                }, 500);
+            }, 1500);
+        }
     </script>
     <script src="js/script.js"></script>
     <script src="js/common.js"></script>
@@ -166,6 +244,7 @@ $conn->close();
     <script src="js/cart.js"></script>
 </body>
 </html>
+
 
 <style>
     :root {

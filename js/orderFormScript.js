@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
             firstName: document.getElementById('firstName').value,
             lastName: document.getElementById('lastName').value,
             shippingAddress: document.getElementById('shippingAddress').value,
-            contactNumber: document.getElementById('contactNumber').value
+            contactNumber: document.getElementById('contactNumber').value,
+            cartItems: JSON.parse(sessionStorage.getItem('cartItems')) || []
         };
 
         fetch('saveOrderDetails.php', {
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify(orderDetails)
         }).then(response => {
             if (response.ok) {
+                updateStocks(orderDetails.cartItems);
                 window.location.href = 'orderConfirmation.php';
             } else {
                 alert('Failed to save order details.');
@@ -67,7 +69,7 @@ function renderCartItems(cartItems) {
             </div>
         `;
         cartItemsContainer.appendChild(itemElement);
-        total += item.price * item.quantity;
+        cartTotal += item.price * item.quantity;
     });
 
     document.getElementById('cartTotal').innerText = cartTotal.toFixed(2);
@@ -124,4 +126,24 @@ function deleteCartItem(index) {
     sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
     renderCartItems(cartItems);
     updateCartCount(cartItems);
+}
+
+function updateStocks(cartItems) {
+    cartItems.forEach(item => {
+        fetch('updateStock.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                productId: item.id,
+                productSize: item.size,
+                quantity: item.quantity
+            })
+        }).then(response => {
+            if (!response.ok) {
+                alert('Failed to update stock for ' + item.name);
+            }
+        });
+    });
 }
