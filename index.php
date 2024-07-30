@@ -120,9 +120,6 @@ $conn->close();
 setCookieValue("userVisit", "Visited", 86400); // Set a cookie for 1 day
 echo "User Visit Cookie: " . getCookieValue("userVisit") . "<br>";
 
-// Perform aggregate queries and display the results
-performAggregateQueries($conn);
-
 
 // Redirect to product page
 header("Location: productPage.php");
