@@ -110,6 +110,7 @@ h1 {
 h1#welcome-text {
     margin-top: 10px;
     margin-bottom: 40px;
+    transition: 0.2s;
 }
 
 .form-container {

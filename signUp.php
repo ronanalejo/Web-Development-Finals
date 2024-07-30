@@ -47,7 +47,7 @@ $conn->close();
     <title>SoleMates</title>
     <link rel="icon" href="img/solemates_logo1.jpg">
 </head>
-<body>
+<body id="background-img" background="img/solemates_bg2.jpg">
     <img src="img/solemates_logo1.jpg" alt="Image" class="Logo">
     <h1 style="color: white;" >Welcome to Solemates</h1>
     <div class="form-container">
@@ -70,10 +70,11 @@ $conn->close();
 <style>
 
 :root {
-    --primary--color: #2c2b30;
+    --primary--color: rgb(36, 36, 36);
 }
 
-    * {
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -81,8 +82,15 @@ $conn->close();
 
 body {
     font-family: sans-serif;
-    background-color: var(--primary--color);
+    background-color: #1b3d49;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100%;
+
 }
+
 
 h1 {
     text-align: center;
@@ -120,15 +128,16 @@ h1 {
 
 #signUpForm button {
     padding: 10px 15px;
-    background-color: #007bff;
+    background-color: var(--primary--color);
     color: #fff;
     border: none;
     border-radius: 100px;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 #signUpForm button:hover {
-    background-color: #0056b3;
+    opacity: 80%;
 }
 
 h3#create-text {
