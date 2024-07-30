@@ -96,11 +96,6 @@ $conn->close();
                 <input type="radio" name="size" value="12">
                 <span>12</span>
             </label>
-            <!-- <input type="radio" name="size" value="7" checked> 7
-            <input type="radio" name="size" value="8"> 8
-            <input type="radio" name="size" value="9"> 9
-            <input type="radio" name="size" value="10"> 10
-            <input type="radio" name="size" value="11"> 11 -->
         </div> <br>
 
         <div class="quantity-selection">
@@ -119,7 +114,7 @@ $conn->close();
                     <form id="cartModal" class="flex-item">
                         <section class="cart-summary">
                             <input type="checkbox" id="selectAll"> Select All</input>
-                            <button id="deleteSelected" style="margin-left: 175px;">Delete Selected</button>
+                            <button id="deleteSelected" style="margin-left: 195px; margin-bottom: -70px;">Delete Selected</button>
                             <div id="cartItems" class="cart-items"></div>
                         </section>
                     </form>
@@ -446,7 +441,9 @@ button {
 
 .size-select {
     border: black 1px;
-    background-color: red;
+    background-color: lightgray;
+    margin-left: 150px;
+    width: 70px;
 }
 
 .size-selection {
@@ -553,12 +550,6 @@ label:last-child span {
 /* ------------------------------------------------ */
 /* CART ITEM SECTION */
 
-.cart-item {
-    display: flex;
-    align-items: center;
-    margin: 0px 50px 0px 0px ;
-}
-
 .cart-item-img {
     height: auto;
 }
@@ -592,6 +583,8 @@ label:last-child span {
     display: flex;
     align-items: center;
     gap: 5px;
+    margin-left: -150px;
+    margin-top: 70px;
 }
 
 .quantity-controls button {
@@ -636,7 +629,8 @@ label:last-child span {
     padding: 5px 10px;
     margin-top: 10px;
     margin-bottom: 20px;
-    width: 110px;
+    width: 30px;
+    margin-right: 10px;
 }
 
 
@@ -675,7 +669,9 @@ button:hover {
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     display: flex;
     align-items: center;
-    margin: 0px 50px 0px 0px;
+    margin-bottom: 10px;
+    width: 450px;
+    height: 125px;
 }
 
 .cart-item-img {    
@@ -743,6 +739,7 @@ button:hover {
     border: 1px solid #ddd;
     padding: 20px;
     border-radius: 5px;
+    width: 450px;
 }
 
 
@@ -1071,6 +1068,31 @@ product-info {
 
 .add-to-cart-overlay.fade-out {
     opacity: 0;
+}
+
+.item-total{
+    margin-left: 10px;
+}
+
+.cart-size-select {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0.5rem; 
+    
+}
+.cart-size-select input[type="radio"] {
+    clip: react(0 0 0 0);
+    clip-path: inset(100%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+.cart-size-select input[type="radio"]:checked + span {
+    box-shadow: 0 0 0 0.0625em gray;
+    background-color: #2c2b30;
+    color: white;
 }
 
 

@@ -25,7 +25,7 @@ function renderCartItems(cartItems) {
                 <button class="quantity-increase" data-index="${index}">+</button>
             </div>
             <button class="delete-item-btn" style="margin-left: 10px;" data-index="${index}">Delete</button>
-            <p style="margin-left: 10px;">Subtotal: $<span class="item-subtotal">${(item.price * item.quantity).toFixed(2)}</span></p>
+            <div class="subtotal"><p style="margin-left: 10px;">Subtotal: $<span class="item-subtotal">${(item.price * item.quantity).toFixed(2)}</span></p></div>
         </div>
         `;
         cartItemsContainer.appendChild(itemElement);

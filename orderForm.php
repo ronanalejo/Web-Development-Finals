@@ -29,7 +29,7 @@
                     <section class="cart-summary">
                         <h2>Cart Summary</h2>
                         <div id="cartItems" class="cart-items"></div>
-                        <p>Total: <span id="cartTotal">$0</span></p>
+                        <p style="margin-left: 10px">Total: <span id="cartTotal">$0</span></p>
                     </section>
                 </div>
                 <div class="shipping-info-container">
@@ -52,6 +52,19 @@
     <script src="js/orderFormScript.js"></script>
     <script src="js/common.js"></script>
     <script src="js/script.js"></script>
+
+    <style>
+    .quantity-controls{
+        margin-top: -100px;
+        float: right;
+    }
+
+    .delete-item-btn{
+        margin-top: -60px;
+        float: right;
+    }
+    </style>
+
 </body>
 
 </html>
